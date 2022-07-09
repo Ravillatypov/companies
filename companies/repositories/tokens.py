@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from tortoise.expressions import Q
-
 from helpers.datetime import utcnow
-from repositories.pg_models import PGRefreshToken, PGEmployee
+from repositories.pg_models import PGEmployee, PGRefreshToken
+from tortoise.expressions import Q
 
 
 async def create_token(
@@ -21,7 +20,7 @@ async def create_token(
 
 
 async def get_employee_by_token(refresh_token: str) -> PGEmployee | None:
-    """Get user id by refresh token."""
+    """Get employee id by refresh token."""
     token = await PGRefreshToken.filter(
         refresh_token=refresh_token,
         expired_at__gte=utcnow(),

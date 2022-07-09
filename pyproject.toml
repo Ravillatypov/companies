@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "users"
+name = "companies"
 version = "0.1.0"
-description = "Users microservice"
+description = "Companies microservice"
 authors = ["Ravil Latypov <ravillatypov12@gmail.com>"]
 
 [tool.poetry.dependencies]

@@ -1,11 +1,19 @@
-from entities.api.auth import EmailLoginRequest, RegistrationRequest, JwtResponse, ResetPasswordRequest, \
-    RefreshTokenRequest, ChangePasswordRequest, ResetPasswordConfirm
-from fastapi import APIRouter, Response, Cookie, Depends
+from entities.api.auth import (
+    ChangePasswordRequest,
+    EmailLoginRequest,
+    JwtResponse,
+    RefreshTokenRequest,
+    RegistrationRequest,
+    ResetPasswordConfirm,
+    ResetPasswordRequest,
+)
+from fastapi import APIRouter, Cookie, Depends, Response
 from repositories.tokens import remove_token
-from services.auth.register import register_employee
 from services.auth.jwt import auth_by_email, refresh_tokens
-from services.auth.password import reset_password_confirm, reset_password_request, change_password
+from services.auth.password import change_password, reset_password_confirm, reset_password_request
+from services.auth.register import register_employee
 from web.dependencies import get_employee_id
+
 router = APIRouter(prefix='/api/companies', tags=['companies'])
 
 
@@ -55,7 +63,7 @@ async def refresh_token_url(
 
 
 @router.post(
-    '/token/revoke'
+    '/token/revoke',
 )
 async def revoke_token_url(
         request_model: RefreshTokenRequest | None,
@@ -74,7 +82,7 @@ async def revoke_token_url(
 
 
 @router.post(
-    '/password/reset-request'
+    '/password/reset-request',
 )
 async def reset_password_request_url(request_model: ResetPasswordRequest):
     """Reset password request."""
@@ -85,7 +93,7 @@ async def reset_password_request_url(request_model: ResetPasswordRequest):
     '/password/reset-confirm',
     response_model=JwtResponse,
 )
-async def reset_password_request_url(
+async def reset_password_confirm_url(
         request_model: ResetPasswordConfirm,
         response: Response,
 ):
@@ -94,7 +102,7 @@ async def reset_password_request_url(
 
 
 @router.post(
-    '/password/change'
+    '/password/change',
 )
 async def change_password_url(
         request_model: ChangePasswordRequest,
@@ -118,5 +126,5 @@ async def get_my_company_url():
 @router.post(
     '/my-company',
 )
-async def get_my_company_url():
+async def update_my_company_url():
     """Get about my company."""

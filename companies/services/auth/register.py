@@ -1,9 +1,9 @@
 from uuid import uuid4
 
-from entities.api.auth import RegistrationRequest, JwtResponse
+from entities.api.auth import JwtResponse, RegistrationRequest
+from fastapi import HTTPException, Response, status
 from helpers.datetime import after
-from repositories.employees import email_is_exist, create_employee
-from fastapi import HTTPException, status, Response
+from repositories.employees import create_employee, email_is_exist
 from services.auth.jwt import get_jwt_tokens
 
 

@@ -1,10 +1,9 @@
 from datetime import datetime
 from uuid import UUID
 
-from tortoise.expressions import Q
-
 from helpers.datetime import utcnow
 from repositories.pg_models import PGEmployee
+from tortoise.expressions import Q
 
 
 async def email_is_exist(email: str) -> bool:
@@ -12,7 +11,7 @@ async def email_is_exist(email: str) -> bool:
     return await PGEmployee.filter(email=email).exists()
 
 
-async def create_employee(
+async def create_employee(  # noqa: WPS211
         email: str,
         code: str | UUID,
         code_expired_at: datetime,
@@ -72,4 +71,3 @@ async def clear_inactive_employees_by_email(email: str):
         email_code_expired_at=None,
         email_activate_code=None,
     )
-

@@ -1,6 +1,5 @@
-from pydantic import BaseModel, EmailStr, validator
-
 from entities.enums import LegalTypeEnum
+from pydantic import BaseModel, EmailStr, validator
 
 
 class EmailLoginRequest(BaseModel):
