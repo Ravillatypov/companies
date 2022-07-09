@@ -14,11 +14,7 @@ class PGCompany(Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
 
-    main_employee: fields.ForeignKeyRelation['PGEmployee'] = fields.ForeignKeyField(
-        'models.PGEmployee',
-        on_delete=fields.SET_NULL,
-        null=True,
-    )
+    main_employee_id = fields.IntField(null=True)
 
     extra = fields.JSONField(null=True)
 
